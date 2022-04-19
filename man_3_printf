@@ -1,53 +1,69 @@
-.TH _PRINTF 1 2022-04-19 GNU
-
+.TH _PRINTF "15 April 2022" "Linux Programmer's manual"
 .SH NAME
-_printf \- check format and display data on standard output
-
+.B _printf
+- Formatted output conversion.
 .SH SYNOPSIS
-.B _printf FORMAT [ARGUMENT] ...
-.B _printf OPTION
+.B #include "main.h"
 
+.B int _printf(const char *
+.I format
+.B , ...)
 .SH DESCRIPTION
+.B _printf()
+Prints to standard output under the control of a 
+.I format
+string that specifies how subsequent arguments are converted for output. 
+.SH Return value
+On successful return, these functions return the number of characters printed, excluding the null byte used to end output to strings.
 
-.B _printf ARGUMENTS(s)
-takes unlimted no of arguments with different formats, executes and gives outputs a string to std output. The formats are described below;
-.B Conversion Specifiers
-A character that determines the type of conversion to be applied. They include;
+If an output error is encountered, a negative value is returned.
+.SH Format of the format string
+The format string is composed of 0 or more directives (ordinary characters that are not %), which are copied to the output stream. The format string is also composed of conversion specifications, each of which result in fetching zero or more subsequent arguments. Each conversion specification is introduced by the character % and ends with the conversion specifier.
+The argument must correspond properly with the conversion specifier. By default, the arguments are used in the order given.
+.SH The conversion specifier
+A character that specifies the type of conversion to be applied. The conversion specifiers and their meanings are:
 .TP
-.BR \d ", " \i
+.BR c
+The int argument is converted to an unsigned char, then the resulting character is written
+.TP
+.B s
+The const char * argument is expected to be a pointer to an array of character type (pointer to a string). Characters from the array are written up to a terminating null byte, but do ot include the terminating null byte.
+.TP
+.B S
+Prints a string. Non printable characters are printed as "\x" followed by their ASCII values in two digit hexadecimal
+.TP
+.B d, i
 The int argument is converted to signed decimal notation.
-.BR \c
-The int argument is converted to a char and the resulting character is printed.
-.BR \s
-The const char * argument is expected to be a pointer to a string. The character are parsed and written as an array but the null teminator ('\0') is not incuded.
-.BR \%
-This is a format specifier, the next value is converted but % is not converted.
-.BR \b
-the unsigned int argument is converted to binary and printed on display.
-.BR \p
-the void pinter argument is written in hexadecimal then displayed.
-
-.B OPTION
 .TP
-.BR \-h "," \-? ", " \-\-help
-display this help information.
+.B x, X
+The unsigned int argument is converted to unsigned lowercase hexadecimal notation(x), or unsigned uppercase hexadecimal notation(X).
 .TP
-.BR \-v ", " \-\-version
-outputs the current version
+.B u
+The unsigned int argument is converted to unsigned decimal notation
 .TP
-.BR \-d ", " \-\-dir " " fIpath
-outputs only the current version
-
-.SH RETURN VALUE
-When the function runs successfully it returns the number of characters printed not including the null byte at the end of the all strings
-
-.SH FILES
+.B o, b
+The unsigned int argument is converted to unsigned octal notation(o) or binary notation(b).
 .TP
-.I /etc/man
-.SH Author
-Written by Bram Wang'oma, and Julius Kanani
+.B p
+Address is printed in hexadecimal.
+.TP
+.B r
+Prints a string in reverse.
+.TP
+.B R
+Prints a string converted to rot13
+.TP
+.B %
+A '%' is written but no argument is converted. The complete version specification is '%%'
+.SH EXAMPLE
+To print the day of the year, where weekday and month are pointers to strings and day and year are integers:
 
+#include "main.h"
+
+_printf("%s, %s %d, %d\\n", weekday, month, day, year);
 .SH SEE ALSO
-.B printf(1)
-Full Details ⟨http://www.gnu.org/software/coreutils/printf⟩.
-
+.I printf(3)
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Abdul Ahmed Abdul and Abdulhameed Abdulhameed Abdulkareem

@@ -1,0 +1,53 @@
+.TH _PRINTF 1 2022-04-19 GNU
+
+.SH NAME
+_printf \- check format and display data on standard output
+
+.SH SYNOPSIS
+.B _printf FORMAT [ARGUMENT] ...
+.B _printf OPTION
+
+.SH DESCRIPTION
+
+.B _printf ARGUMENTS(s)
+takes unlimted no of arguments with different formats, executes and gives outputs a string to std output. The formats are described below;
+.B Conversion Specifiers
+A character that determines the type of conversion to be applied. They include;
+.TP
+.BR \d ", " \i
+The int argument is converted to signed decimal notation.
+.BR \c
+The int argument is converted to a char and the resulting character is printed.
+.BR \s
+The const char * argument is expected to be a pointer to a string. The character are parsed and written as an array but the null teminator ('\0') is not incuded.
+.BR \%
+This is a format specifier, the next value is converted but % is not converted.
+.BR \b
+the unsigned int argument is converted to binary and printed on display.
+.BR \p
+the void pinter argument is written in hexadecimal then displayed.
+
+.B OPTION
+.TP
+.BR \-h "," \-? ", " \-\-help
+display this help information.
+.TP
+.BR \-v ", " \-\-version
+outputs the current version
+.TP
+.BR \-d ", " \-\-dir " " fIpath
+outputs only the current version
+
+.SH RETURN VALUE
+When the function runs successfully it returns the number of characters printed not including the null byte at the end of the all strings
+
+.SH FILES
+.TP
+.I /etc/man
+.SH Author
+Written by Bram Wang'oma, and Julius Kanani
+
+.SH SEE ALSO
+.B printf(1)
+Full Details ⟨http://www.gnu.org/software/coreutils/printf⟩.
+

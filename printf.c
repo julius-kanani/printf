@@ -2,11 +2,10 @@
 
 /**
  * _printf - produces output according to a format
- * @format: format string containing the characters and the specifiers.
- *
- * Description: This function will call the get_print() function that will
+ * @format: format string containing the characters and the specifiers
+ * Description: this function will call the get_print() function that will
  * determine which printing function to call depending on the conversion
- * specifiers contained in fmt.
+ * specifiers contained into fmt
  * Return: length of the formatted output string
  */
 int _printf(const char *format, ...)
